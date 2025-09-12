@@ -4,6 +4,7 @@ import {
   User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "./firebase";
@@ -27,6 +28,7 @@ interface ContextProps {
   signUp: (email: string, password: string) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<ContextProps>({
@@ -35,6 +37,7 @@ const AuthContext = createContext<ContextProps>({
   signUp: async () => undefined,
   signIn: async () => undefined,
   signOut: async () => undefined,
+  resetPassword: async () => undefined,
 });
 
 export const AuthProvider = ({ children }: { children: any }) => {
@@ -98,12 +101,23 @@ function useProvideAuth() {
     auth.signOut().then(() => handleUser(null));
   };
 
+  const resetPassword = async (email: string) => {
+    setLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(handleUser);
     return () => unsub();
   }, []);
 
-  return { user, loading, signUp, signIn, signOut };
+  return { user, loading, signUp, signIn, signOut, resetPassword };
 }
 
 async function formatUser<UserProps>(user: User) {

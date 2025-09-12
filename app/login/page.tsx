@@ -9,7 +9,7 @@ import { useAuth } from "@/lib/auth";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Spinner from "@/components/ui/Spinner";
-import { errorToast } from "@/components/ui/Toast";
+import { errorToast, successToast } from "@/components/ui/Toast";
 
 export default function Login() {
   const { push } = useRouter();
@@ -46,6 +46,19 @@ export default function Login() {
     return;
   }
 
+  async function handleResetPassword() {
+    if (!email) {
+      errorToast("Please enter your email address.");
+      return;
+    }
+    try {
+      await auth.resetPassword(email);
+      successToast("Password reset email sent. Please check your junk mail too.");
+    } catch (error) {
+      errorToast("Failed to send reset email.");
+    }
+  }
+
   return (
     <div className="flex flex-col min-w-screen text-center items-center md:justify-center px-8 mt-24 sm:mt-28 gap-x-8 ">
       <Image src={logo} alt="Western USC" className="m-4 w-28 sm:w-32" />
@@ -80,12 +93,21 @@ export default function Login() {
                 <></>
               )}
             </Button>
-            <a
-              className="inline-block align-baseline font-bold text-sm text-western hover:text-black transition-colors"
-              href="/register"
-            >
-              Not registered? Create a club profile.
-            </a>
+            <div className="flex flex-col space-y-2">
+              <button
+                type="button"
+                onClick={handleResetPassword}
+                className="inline-block align-baseline font-bold text-sm text-western hover:text-black transition-colors"
+              >
+                Forgot password?
+              </button>
+              <a
+                className="inline-block align-baseline font-bold text-sm text-western hover:text-black transition-colors"
+                href="/register"
+              >
+                Not registered? Create a club profile.
+              </a>
+            </div>
           </div>
         </form>
       </div>
