@@ -21,9 +21,8 @@ export async function POST(request: Request) {
   
   console.log('DEBUG clubs length:', clubs.length);
   
-  const validClubs = clubs.filter(
-    (c: any) => Array.isArray(c.quiz) && c.quiz.length === data.length
-  );
+  const validClubs = clubs.filter((c: any) => Array.isArray(c.quiz));
+
   console.log(
     'DEBUG valid clubs with quiz:',
     validClubs.length,
@@ -31,9 +30,9 @@ export async function POST(request: Request) {
     clubs.length
   );
 
-  // Q8 is the last answer in `data` array (index 7 if 0-indexed)
-  const mustBeAccessible = Boolean(data[7] === 1); // adjust if "yes" is coded differently
-
+  // last answer indicates accessibility requirement
+  const mustBeAccessible = Boolean(data[data.length - 1] === 0); // adjust if "yes" is coded differently
+  
   // Filter out clubs that aren't accessible when the user requires it
   const pool = validClubs.filter(
     (c: any) => !mustBeAccessible || c.accessible === true
@@ -45,7 +44,9 @@ export async function POST(request: Request) {
 
   const source = pool.length ? pool : validClubs; // use filtered set if any remain
   source.forEach((club) => {
-    const quizClub = (club.quiz ?? []).map(Number);
+    const quizClub = Array.from({ length: data.length }, (_, i) =>
+      Number((club.quiz ?? [])[i] ?? 0)
+    );
     const score = manhattanSimilarityWeighted(data.map(Number), quizClub, QUIZ_WEIGHTS);
     similarities.push({
       email: String(club.email ?? ""),

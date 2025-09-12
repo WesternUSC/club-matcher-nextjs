@@ -1,5 +1,17 @@
-// Weights for Q1..Q8 (sum ≈ 1). Tweak as you like.
-export const QUIZ_WEIGHTS: number[] = [0.15, 0.15, 0.13, 0.13, 0.12, 0.12, 0.10, 0.10];
+// Weights for Q1..Q11.
+export const QUIZ_WEIGHTS: number[] = [
+  0.14,
+  0.14,
+  0.09,
+  0.05,
+  0.09,
+  0.05,
+  0.05,
+  0.11,
+  0.07,
+  0.12,
+  0.09,
+];
 
 // Clamp helper
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));

@@ -2,6 +2,7 @@
 
 import ProfileTabGroup from "@/components/profile/ProfileTabGroup";
 import { useProfileContext } from "@/context/ProfileContext";
+import { QuizData } from "@/data/QuizData";
 import { useAuth } from "@/lib/auth";
 import { Club } from "@/lib/club";
 import { getDomainURL } from "@/lib/utils";
@@ -31,6 +32,11 @@ export default function Profile() {
     );
     const result = await res.json();
 
+    const quizArray: number[] = result.data["quiz"] ?? [];
+    while (quizArray.length < QuizData.length) {
+      quizArray.push(0);
+    }
+
     const formatClub: Club = {
       email: result.data["email"],
       name: result.data["name"],
@@ -38,7 +44,7 @@ export default function Profile() {
       tag: result.data["tag"],
       storefront: result.data["storefront"],
       westernlink: result.data["westernlink"],
-      quiz: result.data["quiz"],
+      quiz: quizArray,
     };
     setProfile(formatClub);
 
