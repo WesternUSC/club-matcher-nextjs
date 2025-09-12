@@ -56,7 +56,7 @@ export default function Home() {
           <h2 className="text-xl md:text-2xl font-semibold">
             How long is the quiz and how does it work?
           </h2>
-          <p>The quiz is a total of 8 questions.</p>
+          <p>The quiz is a total of 11 questions.</p>
           <p>
             We ask a representative from each club to take the exact same quiz.
             We find the three clubs with the highest similarity to your set of

@@ -1,14 +1,14 @@
 export const QuizData = [
   {
     id: 1,
-    question:
-      "Which are the activities you would most prefer to be engaged in?",
+    question: "What do you hope to gain most from joining a club?",
     options: [
       "Just generally being social with other like-minded students.",
       "I want to meet students of similar backgrounds.",
       "I want to give back to the community through volunteer work.",
-      "I'm looking to enhance my educational experience.",
-      "I am looking to raise awareness for a particular cause.",
+      "I'm looking for professional / educational development",
+      "I am looking to raise awareness for a cause I'm interested in.",
+      "I want to learn a new skill or hobby.",
     ],
   },
   {
@@ -76,6 +76,38 @@ export const QuizData = [
   },
   {
     id: 8,
+    question: "When it comes to club events, what’s your vibe?",
+    options: [
+      "Large social gatherings (parties, mixers)",
+      "Casual hangouts in smaller groups",
+      "Outdoor or physically active events",
+      "Advocacy community service, or volunteer opportunities",
+      "Creative workshops (art, music, writing, DIY, etc.)",
+      "Performances and showcases (theatre, dance, music, fashion shows)",
+      "Academic or professional development events (panels, networking nights, competitions)",
+      "Cultural celebrations and festivals",
+    ],
+  },
+  {
+    id: 9,
+    question: "How far are you willing to travel for club meetings or events?",
+    options: [
+      "On-campus only",
+      "Off-campus in the city",
+      "Doesn’t matter",
+    ],
+  },
+  {
+    id: 10,
+    question: "Do you prefer clubs that are:",
+    options: [
+      "More social and casual",
+      "More structured and goal-driven",
+      "A mix of both",
+    ],
+  },
+  {
+    id: 11,
     question:
       "It is important for you that any organization you join be fully accessible for those with disabilities?",
     options: [

@@ -9,6 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
+import { QuizData } from "@/data/QuizData";
 
 export interface Club {
   name: string;
@@ -31,7 +32,7 @@ export const NULL_CLUB: Club = {
   westernlink: "",
   description: "",
   tag: "",
-  quiz: [],
+  quiz: Array(QuizData.length).fill(0),
 };
 
 export const NULL_CLUB_WITH_SCORE: ClubWithScore = {
@@ -41,7 +42,7 @@ export const NULL_CLUB_WITH_SCORE: ClubWithScore = {
   westernlink: "",
   description: "",
   tag: "",
-  quiz: [],
+  quiz: Array(QuizData.length).fill(0),
   matchScore: 0,
 };
 
